@@ -15,33 +15,45 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
   <body>
     <Header />
     <main>
-		  <div style="text-align:center; margin: 2rem 0;">
-<Image 
-  src={ProfileImage} 
-  alt="Fahad Azam" 
-  width={120} 
-  height={120} 
-  style="border-radius:50%; object-fit:cover; border:2px solid #ccc;" 
-/>
-         <h1 style="margin-bottom: 0.5rem;">👋 Hey there! I’m <span style="color:#0077cc;">Fahad Azam</span></h1>
+      <section style="text-align:center; margin: 2rem 0;">
+        <Image 
+          src={ProfileImage} 
+          alt="Fahad Azam" 
+          width={120} 
+          height={120} 
+          style="border-radius:50%; object-fit:cover; border:2px solid #ccc;" 
+        />
+        <h1 style="margin-bottom: 0.5rem;">
+          👋 Hey there! I’m <span style="color:#0077cc;">Fahad Azam</span>
+        </h1>
         <p style="font-size: 1.1rem; color: #555; max-width: 600px; margin: 0 auto;">
           Welcome to my corner of the internet! Here, I share my journey exploring Oracle databases, Redis, cloud technologies, DevOps, shell scripting, and sometimes my thoughts on anime and other tech curiosities.
         </p>
+
+        <!-- Download Resume Button -->
+        <div style="margin-top:1.5rem;">
+          <a 
+            href="/resume.pdf" 
+            download 
+            style="display:inline-block; padding:0.75rem 1.5rem; background:#0077cc; color:#fff; border-radius:8px; text-decoration:none; font-weight:bold;"
+          >
+            📄 Download My Resume
+          </a>
+        </div>
       </section>
 
       <section style="margin-top: 2rem; margin-bottom: 2rem; text-align: center;">
-  <h2 style="margin-bottom: 1rem; color:#0077cc;">What You’ll Find Here</h2>
-  <ul style="display: inline-block; text-align: left; list-style: disc; padding-left: 1.5rem; margin: 0 auto;">
-    <li>Oracle Database administration tips and tutorials</li>
-    <li>Redis management, caching strategies, and performance tips</li>
-    <li>Cloud solutions and practical guides (AWS, OCI, etc.)</li>
-    <li>DevOps practices, automation, and workflow optimizations</li>
-    <li>Shell scripting tricks and automation ideas</li>
-    <li>Thoughts and reviews on anime I’m currently watching</li>
-    <li>Personal experiments, reflections, and occasional random musings</li>
-  </ul>
-</section>
-
+        <h2 style="margin-bottom: 1rem; color:#0077cc;">What You’ll Find Here</h2>
+        <ul style="display: inline-block; text-align: left; list-style: disc; padding-left: 1.5rem; margin: 0 auto;">
+          <li>Oracle Database administration tips and tutorials</li>
+          <li>Redis management, caching strategies, and performance tips</li>
+          <li>Cloud solutions and practical guides (AWS, OCI, etc.)</li>
+          <li>DevOps practices, automation, and workflow optimizations</li>
+          <li>Shell scripting tricks and automation ideas</li>
+          <li>Thoughts and reviews on anime I’m currently watching</li>
+          <li>Personal experiments, reflections, and occasional random musings</li>
+        </ul>
+      </section>
 
       <section style="text-align: center; margin-top: 2rem;">
         <p>
