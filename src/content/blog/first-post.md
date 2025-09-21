@@ -1,16 +1,93 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+title: 'ASM Striping and Mirroring'
+description: 'ASM Power of Striping and Mirroring – Performance and Redundancy Simplified'
+pubDate: 'Sep 21 2025'
+heroImage: '../../assets/ASM.jpg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+When managing databases, two critical challenges always come up: **performance** and **data protection**. Oracle ASM (Automatic Storage Management) directly addresses these through **striping** and **mirroring**. Let’s break these concepts down in practical terms without going into DBA-only jargon.  
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+---
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+## What is Striping?  
+Striping is about **spreading data across multiple disks** instead of writing all data into a single disk.  
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+- **How it works in ASM**:  
+  ASM divides files into small chunks called **allocation units (AUs)**. These AUs are evenly distributed across all available disks in the disk group.  
+- **Why it matters**:  
+  Multiple disks can be read or written to **in parallel**, which improves I/O performance.  
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+**Example**:  
+Suppose you have three disks (Disk1, Disk2, Disk3). A database file isn’t placed entirely on Disk1; instead, its chunks are distributed like this:  
+
+AU1 → Disk1
+AU2 → Disk2
+AU3 → Disk3
+AU4 → Disk1
+AU5 → Disk2
+AU6 → Disk3
+
+
+So when the database queries data, it can fetch from all disks simultaneously instead of hitting one disk repeatedly.  
+
+**Result**: Better throughput and faster performance.  
+
+---
+
+## What is Mirroring?  
+Mirroring is about **storing multiple copies of the same data** across different disks to protect against disk failures.  
+
+- **How it works in ASM**:  
+  ASM supports different redundancy levels:  
+  - **Normal redundancy** → 2 copies of data (like RAID 1)  
+  - **High redundancy** → 3 copies of data  
+  - **External redundancy** → No mirroring (relies on hardware RAID)  
+
+**Example**:  
+In **normal redundancy**, if AU1 is placed on Disk1, its mirror copy (AU1’) is placed on Disk2.  
+
+AU1 → Disk1
+AU1’ → Disk2
+AU2 → Disk2
+AU2’ → Disk3
+AU3 → Disk3
+AU3’ → Disk1
+
+
+If Disk1 fails, ASM automatically uses the mirrored copy from Disk2 or Disk3 without downtime.  
+
+**Result**: Continuous availability and protection against disk failure.  
+
+---
+
+## Why ASM’s Striping + Mirroring is Powerful  
+- **Performance** → Parallel I/O from multiple disks (striping).  
+- **Redundancy** → Automatic protection against disk failures (mirroring).  
+- **Simplification** → No need to manually manage RAID or complex storage setups. ASM abstracts this for DBAs and ensures optimal data placement automatically.  
+
+---
+
+## Real-World Simplified Case  
+Imagine an IT system where:  
+- You have 6 disks.  
+- ASM is configured with **normal redundancy** and **striping**.  
+
+When a database writes a table:  
+- The table’s blocks are **striped** across all 6 disks for performance.  
+- Each block also has a **mirror copy** on another disk for redundancy.  
+
+Even if one disk fails, your database continues running, and performance doesn’t bottleneck on a single device.  
+
+---
+
+## Key Takeaway 
+
+![Alt text](../../assets/striping+mirroring.png)
+
+ASM’s striping and mirroring give databases:  
+- **High performance** (parallel disk usage)  
+- **High availability** (automatic data redundancy)  
+- **Low admin overhead** (ASM handles placement and recovery)  
+
+In short, ASM makes storage both **faster and safer** without requiring deep storage configuration expertise.
+

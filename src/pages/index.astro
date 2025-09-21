@@ -1,49 +1,60 @@
 ---
+import { Image } from "astro:assets";
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ProfileImage from '../assets/profile.jpg';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+		  <div style="text-align:center; margin: 2rem 0;">
+<Image 
+  src={ProfileImage} 
+  alt="Fahad Azam" 
+  width={120} 
+  height={120} 
+  style="border-radius:50%; object-fit:cover; border:2px solid #ccc;" 
+/>
+         <h1 style="margin-bottom: 0.5rem;">👋 Hey there! I’m <span style="color:#0077cc;">Fahad Azam</span></h1>
+        <p style="font-size: 1.1rem; color: #555; max-width: 600px; margin: 0 auto;">
+          Welcome to my corner of the internet! Here, I share my journey exploring Oracle databases, Redis, cloud technologies, DevOps, shell scripting, and sometimes my thoughts on anime and other tech curiosities.
+        </p>
+      </section>
+
+      <section style="margin-top: 2rem; margin-bottom: 2rem; text-align: center;">
+  <h2 style="margin-bottom: 1rem; color:#0077cc;">What You’ll Find Here</h2>
+  <ul style="display: inline-block; text-align: left; list-style: disc; padding-left: 1.5rem; margin: 0 auto;">
+    <li>Oracle Database administration tips and tutorials</li>
+    <li>Redis management, caching strategies, and performance tips</li>
+    <li>Cloud solutions and practical guides (AWS, OCI, etc.)</li>
+    <li>DevOps practices, automation, and workflow optimizations</li>
+    <li>Shell scripting tricks and automation ideas</li>
+    <li>Thoughts and reviews on anime I’m currently watching</li>
+    <li>Personal experiments, reflections, and occasional random musings</li>
+  </ul>
+</section>
+
+
+      <section style="text-align: center; margin-top: 2rem;">
+        <p>
+          I keep things honest, approachable, and practical. Whether you’re a beginner or a fellow tech explorer, you’ll find something useful—or at least something interesting!
+        </p>
+        <p>
+          Feel free to browse around, leave comments, or just explore. And if you want to keep up with my latest posts, make sure to bookmark this page.
+        </p>
+        <p>
+          Let’s learn, experiment, and geek out together!
+        </p>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
