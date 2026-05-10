@@ -1,3 +1,9 @@
+---
+title: "All You Need to Know About Cursors in Oracle"
+description: "Deep dive into Oracle cursors, cursor state, PGA memory, SQL*Plus behavior, and ORA-01000 troubleshooting."
+pubDate: 2026-05-10
+---
+
 ## All You need to know about Cursors in Oracle
 
 Cursors in oracle are very misunderstood topic so lets have a clean discussion here
