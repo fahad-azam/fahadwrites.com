@@ -2,7 +2,6 @@
 title: 'ASM Striping and Mirroring'
 description: 'ASM Power of Striping and Mirroring – Performance and Redundancy Simplified'
 pubDate: 'Sep 21 2025'
-heroImage: '../../assets/ASM.jpg'
 ---
 
 When managing databases, two critical challenges always come up: **performance** and **data protection**. Oracle ASM (Automatic Storage Management) directly addresses these through **striping** and **mirroring**. Let’s break these concepts down in practical terms without going into DBA-only jargon.  
