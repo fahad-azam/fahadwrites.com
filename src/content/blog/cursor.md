@@ -4,8 +4,6 @@ description: "Deep dive into Oracle cursors, cursor state, PGA memory, SQL*Plus 
 pubDate: 'May 05 2026'
 ---
  
-# All You Need to Know About Cursors in Oracle
- 
 Cursors in Oracle are a very misunderstood topic, so let's have a clean discussion here.
  
 ---
